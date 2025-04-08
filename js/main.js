@@ -136,3 +136,33 @@ window.addEventListener("scroll", () => {
   }
   lastScroll = currentScroll;
 });
+
+// Animate services when scrolled into view
+const animateServices = () => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Add animation class to all service cards within the section
+          entry.target.querySelectorAll(".service-card").forEach((card) => {
+            card.classList.add("animate");
+          });
+          // Unobserve after animation is triggered
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.2, // Trigger when 20% of the section is visible
+    }
+  );
+
+  // Observe the services section
+  const servicesSection = document.querySelector(".services-grid");
+  if (servicesSection) {
+    observer.observe(servicesSection);
+  }
+};
+
+// Call the function when the page loads
+document.addEventListener("DOMContentLoaded", animateServices);
