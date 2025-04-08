@@ -166,3 +166,28 @@ const animateServices = () => {
 
 // Call the function when the page loads
 document.addEventListener("DOMContentLoaded", animateServices);
+
+const animatestepContainer = () => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll(".step").forEach((step) => {
+            step.classList.add("animate");
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.2,
+    }
+  );
+
+  const stepContainer = document.querySelector(".steps-container");
+  if (stepContainer) {
+    observer.observe(stepContainer);
+  }
+};
+
+document.addEventListener("DOMContentLoaded", animatestepContainer);
