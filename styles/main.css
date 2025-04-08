@@ -45,6 +45,14 @@ body {
   align-items: center;
 }
 
+/* Add new media query for large screens */
+@media (min-width: 1460px) {
+  .nav-container {
+    max-width: 100%;
+    padding: 1rem 4rem; /* Add horizontal padding for spacing from edges */
+  }
+}
+
 .home-logo {
   text-decoration: none;
   color: var(--accent-color);
@@ -107,6 +115,30 @@ body {
   display: none;
   font-size: 1.5rem;
   cursor: pointer;
+  position: relative;
+}
+
+.mobile-menu .menu-icon,
+.mobile-menu .close-icon {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  position: absolute;
+  right: 0.5rem;
+  top: -0.6rem;
+}
+
+.mobile-menu .close-icon {
+  opacity: 0;
+  transform: rotate(-180deg);
+}
+
+.mobile-menu.active .menu-icon {
+  opacity: 0;
+  transform: rotate(180deg);
+}
+
+.mobile-menu.active .close-icon {
+  opacity: 1;
+  transform: rotate(0);
 }
 
 /* Hero Section */
@@ -118,21 +150,42 @@ body {
   background-position: center;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  justify-content: start;
+  text-align: start;
   color: var(--white);
-  padding: 0 2rem;
+  padding: 0 10rem;
+  min-height: 500px;
 }
 
 .hero-content {
   max-width: 800px;
 }
 
+/* Add keyframes for the slide-in animation */
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Update hero h1 styles */
 .hero h1 {
   font-size: 4.5rem;
-  font-weight: 700;
+  font-weight: normal;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   line-height: 1.2;
   margin-bottom: 1.5rem;
+  animation: slideInFromLeft 1s ease-out forwards;
+  /* Optional: add a slight delay to ensure animation plays after page load */
+  animation-delay: 0.2s;
+  /* Set initial state */
+  opacity: 0;
 }
 
 .hero .subtitle {
@@ -143,7 +196,7 @@ body {
 .cta-buttons {
   display: flex;
   gap: 1rem;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 }
 
@@ -157,6 +210,7 @@ body {
   text-decoration: none;
   text-transform: uppercase;
   font-size: 0.9rem;
+  text-align: center;
 }
 
 .btn-dark {
@@ -630,6 +684,11 @@ body {
 
   .dropdown.active .dropdown-content {
     display: block;
+    transition: ease-in-out;
+    -webkit-transition: ease-in-out;
+    -moz-transition: ease-in-out;
+    -ms-transition: ease-in-out;
+    -o-transition: ease-in-out;
   }
 
   .dropdown-toggle {
@@ -672,7 +731,10 @@ body {
 
 .service-hero h1 {
   font-size: 3.5rem;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   margin-bottom: 1rem;
+  font-weight: normal;
 }
 
 .service-hero p {
@@ -814,6 +876,10 @@ body {
   .service-hero p {
     font-size: 1rem;
   }
+
+  .hero {
+    padding: 0 2rem;
+  }
 }
 
 /* Update the mobile menu and nav-links styles */
@@ -886,5 +952,64 @@ body {
     margin-top: 1rem;
     width: 100%;
     text-align: center;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
+  .nav-links {
+    margin-right: 1.5rem;
+  }
+}
+
+/* Add more specific media queries for smaller screens */
+@media (max-width: 480px) {
+  .hero {
+    padding: 0 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+
+  .hero .subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-buttons {
+    gap: 0.8rem;
+  }
+
+  .btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Even more specific adjustments for very small screens */
+@media (max-width: 375px) {
+  .hero {
+    min-height: 450px;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .services,
+  .how-it-works,
+  .about,
+  .contact {
+    padding: 3rem 1rem;
+  }
+
+  .services h2,
+  .how-it-works h2,
+  .about h2,
+  .contact h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
   }
 }

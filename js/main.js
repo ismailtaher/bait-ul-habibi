@@ -3,8 +3,9 @@ const mobileMenu = document.querySelector(".mobile-menu");
 const navLinks = document.querySelector(".nav-links");
 const dropdowns = document.querySelectorAll(".dropdown");
 
-// Toggle mobile menu
+// Toggle mobile menu and icon
 mobileMenu.addEventListener("click", () => {
+  mobileMenu.classList.toggle("active");
   navLinks.classList.toggle("active");
 });
 
@@ -33,6 +34,7 @@ dropdowns.forEach((dropdown) => {
 // Close mobile menu when clicking outside
 document.addEventListener("click", (e) => {
   if (!e.target.closest(".nav-container")) {
+    mobileMenu.classList.remove("active");
     navLinks.classList.remove("active");
     dropdowns.forEach((dropdown) => {
       dropdown.classList.remove("active");
@@ -43,6 +45,7 @@ document.addEventListener("click", (e) => {
 // Close mobile menu when window is resized above mobile breakpoint
 window.addEventListener("resize", () => {
   if (window.innerWidth > 768) {
+    mobileMenu.classList.remove("active");
     navLinks.classList.remove("active");
     dropdowns.forEach((dropdown) => {
       dropdown.classList.remove("active");
