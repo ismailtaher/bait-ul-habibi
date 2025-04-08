@@ -191,3 +191,59 @@ const animatestepContainer = () => {
 };
 
 document.addEventListener("DOMContentLoaded", animatestepContainer);
+
+// Animate stats when scrolled into view
+const animateStats = () => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Animate all progress bars in the stats section
+          entry.target.querySelectorAll(".stat-item").forEach((stat) => {
+            // Add animation class to stat item for title animation
+            stat.classList.add("animate");
+
+            // Animate progress bar
+            const progressBar = stat.querySelector(".progress");
+            if (progressBar) {
+              // Store the target width
+              const targetWidth =
+                progressBar.getAttribute("data-width") ||
+                progressBar.style.width;
+              // Set initial width to 0
+              progressBar.style.width = "0";
+              // Trigger animation after a small delay
+              setTimeout(() => {
+                progressBar.style.width = targetWidth;
+              }, 200);
+            }
+          });
+
+          // Unobserve after animation is triggered
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.2,
+    }
+  );
+
+  // Initialize progress bars with data-width attribute
+  document.querySelectorAll(".progress").forEach((progress) => {
+    // Store the original width as a data attribute
+    const width = progress.style.width;
+    progress.setAttribute("data-width", width);
+    // Set initial width to 0
+    progress.style.width = "0";
+  });
+
+  // Observe the stats section
+  const statsSection = document.querySelector(".stats");
+  if (statsSection) {
+    observer.observe(statsSection);
+  }
+};
+
+// Call the function when the page loads
+document.addEventListener("DOMContentLoaded", animateStats);
