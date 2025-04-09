@@ -75,7 +75,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-// Form Submission
+/* // Form Submission
 const contactForm = document.querySelector(".contact-form");
 if (contactForm) {
   contactForm.addEventListener("submit", function (e) {
@@ -84,7 +84,7 @@ if (contactForm) {
     alert("Thank you for your message! We will get back to you soon.");
     this.reset();
   });
-}
+} */
 
 // Animate Progress Bars on Scroll
 const progressBars = document.querySelectorAll(".progress");
@@ -252,3 +252,45 @@ const animateStats = () => {
 
 // Call the function when the page loads
 document.addEventListener("DOMContentLoaded", animateStats);
+
+// Whatsapp on form submit
+document
+  .querySelector(".contact-form")
+  .addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const name = document
+      .querySelector('input[placeholder="Your Name"]')
+      .value.trim();
+    const email = document
+      .querySelector('input[placeholder="Your Email"]')
+      .value.trim();
+    const service = document.querySelector('select[name="service"]').value;
+    const message = document
+      .querySelector('textarea[placeholder="Your Message"]')
+      .value.trim();
+
+    // Check if values are being picked up
+    console.log({ name, email, service, message });
+
+    const phoneNumber = "971585560786"; // Replace with your actual WhatsApp number
+
+    const whatsappMessage =
+      `*New Inquiry from Website*\n\n` +
+      `*Name:* ${name}\n` +
+      `*Email:* ${email}\n` +
+      `*Service:* ${service}\n` +
+      `*Message:* ${message}`;
+
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    console.log(isMobile);
+
+    const whatsappURL = isMobile
+      ? `https://wa.me/${phoneNumber}?text=${encodedMessage}` // opens WhatsApp app
+      : `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`; // opens WhatsApp Web
+
+    window.open(whatsappURL, "_blank");
+  });
+
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+console.log(isMobile);
