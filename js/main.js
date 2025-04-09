@@ -253,6 +253,18 @@ const animateStats = () => {
 // Call the function when the page loads
 document.addEventListener("DOMContentLoaded", animateStats);
 
+// Open whatsapp
+const openWhatsApp = (phoneNumber, message) => {
+  const encodedMessage = encodeURIComponent(message.trim());
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  const whatsappURL = isMobile
+    ? `https://wa.me/${phoneNumber}?text=${encodedMessage}`
+    : `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+
+  window.open(whatsappURL, "_blank");
+};
+
 // Whatsapp on form submit
 document
   .querySelector(".contact-form")
@@ -275,24 +287,33 @@ document
 
     const phoneNumber = "971585560786"; // Replace with your actual WhatsApp number
 
-    const whatsappMessage =
+    const fullMessage =
       `*New Inquiry from Website*\n\n` +
       `*Name:* ${name}\n` +
       `*Email:* ${email}\n` +
       `*Service:* ${service}\n` +
       `*Message:* ${message}`;
 
-    const encodedMessage = encodeURIComponent(whatsappMessage);
-
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    console.log(isMobile);
-
-    const whatsappURL = isMobile
-      ? `https://wa.me/${phoneNumber}?text=${encodedMessage}` // opens WhatsApp app
-      : `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`; // opens WhatsApp Web
-
-    window.open(whatsappURL, "_blank");
+    openWhatsApp(phoneNumber, fullMessage);
   });
 
-const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-console.log(isMobile);
+/* document
+  .getElementById("book-property-btn")
+  .addEventListener("click", function (e) {
+    e.preventDefault();
+    openWhatsApp("971585560786", "*Need to book a property*");
+  });
+
+document.getElementById("book-now").addEventListener("click", (e) => {
+  e.preventDefault();
+  openWhatsApp("971585560786", "*Need to book a property*");
+}); */
+
+const bookNow = document.getElementsByClassName("book-property");
+
+Array.from(bookNow).forEach((book) => {
+  book.addEventListener("click", (e) => {
+    e.preventDefault();
+    openWhatsApp("971585560786", "*Need to book a property*");
+  });
+});
