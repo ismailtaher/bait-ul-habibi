@@ -64,13 +64,14 @@ body {
 .logo {
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: start;
   align-items: end;
 }
 
 .logo img {
   height: 50px;
   margin-right: 0;
+  padding-top: 2px;
   color: #333333;
 }
 
@@ -754,6 +755,8 @@ h3 {
 
   .dropdown.active .dropdown-content {
     display: block;
+    background-color: var(--secondary-color);
+    top: 75%;
     transition: ease-in-out;
     -webkit-transition: ease-in-out;
     -moz-transition: ease-in-out;
@@ -764,6 +767,7 @@ h3 {
   .dropdown-toggle {
     width: 100%;
     justify-content: space-between;
+    font-weight: 100;
   }
 
   .dropdown:hover .dropdown-content {
