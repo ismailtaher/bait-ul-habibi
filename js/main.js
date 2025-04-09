@@ -42,6 +42,11 @@ document.addEventListener("click", (e) => {
   }
 });
 
+const anchorLinks = navLinks.getElementsByClassName("border-bottom");
+navLinks.addEventListener("click", (e) => {
+  mobileMenu.classList.remove("active");
+});
+
 // Close mobile menu when window is resized above mobile breakpoint
 window.addEventListener("resize", () => {
   if (window.innerWidth > 768) {
