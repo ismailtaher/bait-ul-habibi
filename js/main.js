@@ -282,6 +282,8 @@ document
       `*Service:* ${service}\n` +
       `*Message:* ${message}`;
 
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     console.log(isMobile);
 
