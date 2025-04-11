@@ -265,10 +265,21 @@ const openWhatsApp = (phoneNumber, message) => {
   window.open(whatsappURL, "_blank");
 };
 
+const bookNow = document.getElementsByClassName("book-property");
+console.log("book:" + bookNow);
+
+Array.from(bookNow).forEach((book) => {
+  book.addEventListener("click", (e) => {
+    e.preventDefault();
+    openWhatsApp("971585560786", "*Need to book a property*");
+  });
+});
+
 // Whatsapp on form submit
-document
-  .querySelector(".contact-form")
-  .addEventListener("submit", function (e) {
+const contactForm = document.querySelector(".contact-form");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     const name = document
@@ -296,6 +307,7 @@ document
 
     openWhatsApp(phoneNumber, fullMessage);
   });
+}
 
 /* document
   .getElementById("book-property-btn")
@@ -308,12 +320,3 @@ document.getElementById("book-now").addEventListener("click", (e) => {
   e.preventDefault();
   openWhatsApp("971585560786", "*Need to book a property*");
 }); */
-
-const bookNow = document.getElementsByClassName("book-property");
-
-Array.from(bookNow).forEach((book) => {
-  book.addEventListener("click", (e) => {
-    e.preventDefault();
-    openWhatsApp("971585560786", "*Need to book a property*");
-  });
-});
